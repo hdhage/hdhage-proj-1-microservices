@@ -8,6 +8,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/hdhage/proj-1-ms-config-server-dcb-ms-ex
+          uri: https://github.com/hdhage/proj-1-microservices
           clone-on-start: true
           default-label: main
