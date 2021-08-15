@@ -1,0 +1,58 @@
+server:
+  port: 9191
+
+# Routing information for the incoming request and fallback controller method filters
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: USER-SERVICE
+                fallbackuri: forward:/userServiceFallBack
+        - id: DEPARTMENT-SERVICE
+          uri: lb://DEPARTMENT-SERVICE
+          predicates:
+            - Path=/departments/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: DEPARTMENT-SERVICE
+                fallbackuri: forward:/departmentServiceFallBack
+
+# Hystrix time out value 4 sec - if any service does not give response in 4 sec, fallback method will get called
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+# Actuator config for the hystrix dashboard to show info of hystrix stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+
+# Removing below as this is added in Git Repo config server file
+# Cloud config server will provide these properties using bootstrap.yml
+# Register with Eureka service discovery on mentioned url
+
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#    instance:
+#      hostname: localhost

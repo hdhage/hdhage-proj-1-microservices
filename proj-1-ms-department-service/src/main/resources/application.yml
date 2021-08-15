@@ -1,0 +1,22 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: DEPARTMENT-SERVICE
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+
+
+# Removing below as this is added in Git Repo config server file
+# Cloud config server will provide these properties using bootstrap.yml config server address
+# Register with Eureka service discovery on mentioned url
+
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#    instance:
+#      hostname: localhost

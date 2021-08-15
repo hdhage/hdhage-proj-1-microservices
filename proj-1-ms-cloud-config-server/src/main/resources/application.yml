@@ -1,0 +1,13 @@
+server:
+  port: 9296
+
+spring:
+  application:
+    name: CONFIG-SERVER
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/hdhage/proj-1-ms-config-server-dcb-ms-ex
+          clone-on-start: true
+          default-label: main

@@ -1,0 +1,24 @@
+server:
+  port: 9295
+
+spring:
+  application:
+    name: HYSTRIX-DASHBOARD
+
+# To get the hystrix stream allowed in gateway's actuator config
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"
+
+# Removing below as this is added in Git Repo config server file
+# Cloud config server will provide these properties using bootstrap.yml
+# Register with Eureka service discovery on mentioned url
+
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#    instance:
+#      hostname: localhost
